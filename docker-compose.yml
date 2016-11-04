@@ -1,9 +1,9 @@
 kafka:
+  build: .
   ports:
   - 9092:9092/tcp
   labels:
     io.rancher.container.hostname_override: container_name
-  image: kafka:0.10.0.0-alpine
   links:
   - zookeeper:zookeeper
   volumes:
