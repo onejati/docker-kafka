@@ -1,9 +1,9 @@
 FROM java:8-jre-alpine
 
-ENV KAFKA_VER=0.9.0.0
+ENV KAFKA_VER="0.9.0.0"
 
 RUN apk add --update bash zip curl java-gcj-compat&& \
-    curl http://www.us.apache.org/dist/kafka/$KAFKA_VER/kafka_2.10-$KAFKA_VER.tgz| tar -xzf - && \
+    curl http://www.us.apache.org/dist/kafka/$KAFKA_VER/kafka_2.10-${KAFKA_VER}.tgz| tar -xzf - && \
     mv kafka_2.10-$KAFKA_VER /kafka && \
     rm /var/cache/apk/*
 RUN mkdir /tmp/kafka-logs
