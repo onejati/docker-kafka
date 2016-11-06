@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 SERVICE_CONF=${KAFKA_HOME}/config/server.properties
 KAFKA_HEAP_OPTS=${JVMFLAGS:-"-Xmx1G -Xms1G"}
-KAFKA_BROKER_ID=${KAFKA_BROKER_ID:-"0"}
+MAX_KAFKA_BROKER_ID=${MAX_KAFKA_BROKER_ID:-"15"}
 KAFKA_ADVERTISE_PORT=${KAFKA_ADVERTISE_PORT:-"9092"}
 KAFKA_LOG_DIRS=${KAFKA_LOG_DIRS:-${SERVICE_HOME}"/logs"}
 KAFKA_NUM_REPLICATION=${KAFKA_NUM_REPLICATION:-"2"}
@@ -12,12 +12,13 @@ KAFKA_EXT_IP=${KAFKA_EXT_IP}
 
 cat << EOF > ${SERVICE_CONF}
 ############################# Server Basics #############################
-broker.id=${KAFKA_BROKER_ID}
+broker.id.generation.enable = true
+reserved.broker.max.id=${MAX_KAFKA_BROKER_ID}
 ############################# Socket Server Settings ###########################
-port=${KAFKA_ADVERTISE_PORT:-"9092"}
+port=${KAFKA_ADVERTISE_PORT}
 #host.name=localhost
 advertised.host.name=${KAFKA_EXT_IP}
-advertised.port=${KAFKA_ADVERTISE_PORT:-"9092"}
+advertised.port=${KAFKA_ADVERTISE_PORT}
 num.network.threads=3
 num.io.threads=8
 socket.send.buffer.bytes=102400
