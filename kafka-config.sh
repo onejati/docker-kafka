@@ -8,7 +8,7 @@ KAFKA_NUM_REPLICATION=${KAFKA_NUM_REPLICATION:-"2"}
 KAFKA_LOG_RETENTION_HOURS=${KAFKA_LOG_RETENTION_HOURS:-"168"}
 KAFKA_NUM_PARTITIONS=${KAFKA_NUM_PARTITIONS:-"2"}
 KAFKA_ZK_HOST=${KAFKA_ZK_HOST:-"zk:2181"}
-KAFKA_EXT_IP=${KAFKA_EXT_IP}
+KAFKA_EXT_IP=$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)
 
 cat << EOF > ${SERVICE_CONF}
 ############################# Server Basics #############################
